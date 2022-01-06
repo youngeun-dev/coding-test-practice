@@ -7,7 +7,7 @@ for _ in range(num):
     for index in range(len(word)-1):                                  
 # len(word)로 실행했더니 index가 range 범위를 벗어났다는 에러가 떴다                      
         if word[index] != word[index+1]:                              
-            new_word = word[index+1]                                  
+            new_word = word[index+1:]                                  
             if new_word.count(word[index]) > 0:                       
                 error+=1                                              
     if error == 0:                                                    
