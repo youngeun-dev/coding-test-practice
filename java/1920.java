@@ -41,7 +41,7 @@ public class Main {
     	
     	st = new StringTokenizer(br.readLine()," ");
     
-    	for(int i =0;i<n;i++) {
+    	for(int i =0;i<;i++) {
     		key[i]=Integer.parseInt(st.nextToken());
     	}
     	
