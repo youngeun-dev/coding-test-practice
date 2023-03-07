@@ -17,7 +17,7 @@ int main(){
         string name;
         cin >> name;
         list[name]++;
-        if(list[name] > 1){
+        if(list.at(name) == 2){
             answer.push_back(name);
         }
     }
