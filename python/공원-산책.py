@@ -1,72 +1,36 @@
 def solution(park, routes):
     answer = []
-    block = []
+    W = len(park[0])
+    H = len(park)
     
-    
-    # 시작 위치 && 장애물 좌표 찾기 
+    # 시작 좌표 찾기 
     for x in range(len(park)):
         for y in range(len(park[x])):
             if "S" in park[x][y]:
                 answer.append(x)
                 answer.append(y)
-            
-
-    for route in routes:
-        flag = 1
-        
-        # 방향, 이동 거리 
-        compass, length = route.split(' ')
-        length = int(length)
-        
-
-        # 북쪽
-        if "N" in route:
-            move = answer[0] - length
-            if move < 0:
-                continue
-            for i in range(move, answer[0]):
-                if "X" in park[i][answer[1]]:
-                    flag = 0
-            if flag:
-                answer[0] = move
-            else:
-                continue
-            
-            
-        elif "S" in route:
-            move = answer[0] + length
-            if move >= len(park[0]):
-                continue
-            for i in range(answer[0] + 1, move + 1):
-                if "X" in park[i][answer[1]]:
-                    flag = 0
-            if flag:
-                answer[0] = move
-            else:
-                continue
-            
-        elif "W" in route:
-            move = answer[1] - length
-            if move < 0:
-                continue
-            for i in range(move, answer[1]):
-                if "X" in park[answer[0]][i]:
-                    flag = 0
-            if flag:
-                answer[1] = move
-            else:
-                continue
-        
-        elif "E" in route:
-            move = answer[1] + length
-            if move >= len(park[0]):
-                continue
-            for i in range(answer[1], move + 1):
-                if "X" in park[answer[0]][i]:
-                    flag = 0
-            if flag:
-                answer[1] = move
-            else:
-                continue
                 
+    direction = {'N':[-1, 0], 'S':[1, 0], 'W':[0, -1], 'E':[0, 1] }
+    
+    for route in routes:
+        # op: 방향, n: 이동 거리
+        op, n = route.split()
+        n = int(n)
+        
+        # 원래 위치
+        real_x, real_y = answer[0], answer[1];
+        
+        for i in range(n):
+            # 업데이트된 현재 위치
+            x, y = answer[0], answer[1]
+            # 한칸 이동한 위치
+            dx, dy = answer[0] + direction[op][0], answer[1] + direction[op][1]
+            
+            ## 장애물 && 이동 범위 
+            if dx < 0 or dy < 0 or dx >= H or dy >= W or "X" in park[dx][dy]:
+                answer = [real_x, real_y]
+                break
+            else:
+                answer = [dx, dy]
+        
     return answer
