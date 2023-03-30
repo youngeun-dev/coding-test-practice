@@ -1,11 +1,12 @@
 def solution(park, routes):
     answer = []
+    # W: 가로, H: 세로
     W = len(park[0])
     H = len(park)
     
     # 시작 좌표 찾기 
-    for x in range(len(park)):
-        for y in range(len(park[x])):
+    for x in range(H):
+        for y in range(W)):
             if "S" in park[x][y]:
                 answer.append(x)
                 answer.append(y)
@@ -25,8 +26,7 @@ def solution(park, routes):
             x, y = answer[0], answer[1]
             # 한칸 이동한 위치
             dx, dy = answer[0] + direction[op][0], answer[1] + direction[op][1]
-            
-            ## 장애물 && 이동 범위 
+
             if dx < 0 or dy < 0 or dx >= H or dy >= W or "X" in park[dx][dy]:
                 answer = [real_x, real_y]
                 break
