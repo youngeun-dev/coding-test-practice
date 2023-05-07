@@ -18,4 +18,3 @@ for current in range(N):  # 0 ~ N-1
             dp[current + jump] = min(dp[current + jump], dp[current] + 1) # 이동 횟수 +1
 
 print(dp[N-1] if dp[N-1] != N+1 else -1)
-
