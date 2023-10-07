@@ -12,7 +12,7 @@ def dfs(start):
     for i in range(start, n + 1):
         if i not in result:
             result.append(i)
-            dfs(start + 1)
+            dfs(i + 1)
             result.pop()
 
 
