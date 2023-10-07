@@ -25,10 +25,7 @@ def BFS():
             nx, ny = x + dx[i], y + dy[i]
             if 0 <= nx < n and 0 <= ny < m:
                 if graph[nx][ny] == 0:
-                    print(nx, ny)
                     graph[nx][ny] = graph[x][y] + 1
-
-                    print(graph)
                     shack.append((nx, ny))
 
 
