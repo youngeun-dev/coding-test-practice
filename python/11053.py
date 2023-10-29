@@ -1,5 +1,5 @@
-# https://www.acmicpc.net/problem/11055
-# 가장 큰 증가하는 부분 수열
+# https://www.acmicpc.net/problem/11053
+# 가장 긴 증가하는 부분 수열
 import sys
 input = sys.stdin.readline
 
