@@ -1,0 +1,20 @@
+for test_case in range(1, int(input()) + 1):
+    N = int(input())
+    answer = [[0] * N for _ in range(N)]
+
+    dx, dy = [0, 1, 0, -1], [1, 0, -1, 0]
+    direction, num = 0, 1 # 현재 방향, 숫자
+    x, y = 0, -1 # 초기 위치 
+
+    while num <= (N*N):
+        nx, ny = x + dx[direction], y + dy[direction]
+        if 0 <= nx < N and 0 <= ny < N and answer[nx][ny] == 0:
+            answer[nx][ny] = num
+            num += 1
+            x, y = nx, ny
+        else: # 방향 전환 0 -> 1 -> 2 -> 3
+            direction = (direction + 1) % 4
+
+    print(f'#{test_case}')
+    for row in answer:
+        print(*row)
