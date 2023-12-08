@@ -7,7 +7,7 @@ stack = []
 result = 0
 
 for i in range(n):
-    while stack and stack[-1] < height[i]: # 전 빌딩이 현재 빌딩보다 낮거나 같으면 참고할 수 없음
+    while stack and stack[-1] <= height[i]: # 전 빌딩이 현재 빌딩보다 낮거나 같으면 참고할 수 없음
         stack.pop()
     stack.append(height[i])
 
