@@ -1,5 +1,7 @@
 import java.util.*;
 
+// -------------------------------------------------------------
+
 class Solution {
     public String solution(String new_id) {
         String answer = "";
@@ -48,5 +50,78 @@ class Solution {
         }
 
         return answer;
+    }
+}
+
+// -------------------------------------------------------------
+
+class Solution {
+    public String solution(String new_id) {
+        return new KakaoId(new_id)
+            .noUpperCase()
+            .filter()
+            .noDoubleDot()
+            .noSideDot()
+            .noEmpty()
+            .checkMaxLength()
+            .checkMinLength()
+            .getId();
+    }
+    
+    private static class KakaoId {
+        private String id;
+        
+        KakaoId(String id) { this.id = id; }
+        
+        private KakaoId noUpperCase() { 
+            id = id.toLowerCase();
+            return this;
+        }
+        
+        private KakaoId filter() {
+            id = id.replaceAll("[^-_.a-z0-9]", "");
+            return this;
+        }
+        
+        private KakaoId noDoubleDot() {
+            while(id.contains("..")) {
+                id = id.replace("..", ".");
+            }
+            return this;
+        }
+        
+        private KakaoId noSideDot() {
+            // 맨앞 . 제거
+            if(!id.isEmpty() && id.charAt(0) == '.') { id = id.substring(1); }
+            // 맨뒤 . 제거
+            if(!id.isEmpty() && id.charAt(id.length() - 1) == '.') { id = id.substring(0, id.length() - 1); }
+            return this;
+        }
+        
+        private KakaoId noEmpty() {
+            if(id.isEmpty()) { id = "a"; }
+            return this;
+        }
+        
+        private KakaoId checkMaxLength() {
+            if(id.length() >= 16) { 
+                id = id.substring(0, 15);
+                if(id.charAt(id.length() - 1) == '.') { 
+                    id = id.substring(0, id.length() - 1); 
+                }
+            }
+            return this;
+        }
+        
+        private KakaoId checkMinLength() {
+            while(id.length() < 3){
+                id += id.charAt(id.length() - 1);
+            }
+            return this;
+        }
+        
+        private String getId() {
+            return id;
+        }
     }
 }
