@@ -39,3 +39,31 @@ while q:
 
 
 print(visited[N-1][M-1])
+
+
+
+# ---------------------------------------------------------
+from collections import deque
+
+CAN_MOVE = 1
+
+def bfs():
+    q = deque([(0, 0)])
+
+    while q:
+        x, y = q.popleft()
+        if (x, y) == (n - 1, m - 1):
+            print(board[x][y])
+            return
+
+        for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+            nx, ny = x + dx, y + dy
+            if nx < 0 or nx >= n or ny < 0 or ny >= m: continue
+            if board[nx][ny] == CAN_MOVE:
+                board[nx][ny] = board[x][y] + 1
+                q.append((nx, ny))
+
+
+n, m = map(int, input().split())
+board = list(list(map(int, input().strip())) for _ in range(n))
+bfs()
