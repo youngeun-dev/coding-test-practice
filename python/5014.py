@@ -29,3 +29,26 @@ def BFS(S, G):
 F, S, G, U, D = map(int, input().split())
 
 print(0 if S == G else BFS(S, G))
+
+
+# ------
+from collections import deque
+
+def bfs():
+    q = deque([(start)])
+    building[start] = 1
+    while q:
+        x = q.popleft()
+        if x == goal:
+            return building[x] - 1
+        for nx in [x + up, x - down]:
+            if nx < 1 or total_floor < nx: continue
+            if building[nx] == 0:
+                building[nx] = building[x] + 1
+                q.append(nx)
+    return "use the stairs"
+
+total_floor, start, goal, up, down = map(int, input().split())
+building = [0] * (total_floor + 1)
+result = bfs()
+print(0 if start == goal else result)
