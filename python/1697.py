@@ -30,3 +30,32 @@ N, K = map(int, input().split())
 visited = [0] * MAX
 
 print(BFS(N, K) - 1)
+
+
+# ----------------------------
+from collections import deque
+
+MAX = 100001
+
+
+def bfs(x):
+    q = deque([x])
+    visited[x] = 0
+    while q:
+        x = q.popleft()
+
+        if x == k:
+            print(visited[x])
+            return
+
+        for nx in [x - 1, x + 1, 2 * x]:
+            if nx < 0 or nx >= MAX: continue
+            if visited[nx] < MAX: continue
+
+            visited[nx] = visited[x] + 1
+            q.append(nx)
+
+
+n, k = map(int, input().split())
+visited = [MAX] * MAX
+bfs(n)
