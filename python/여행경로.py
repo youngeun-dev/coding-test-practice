@@ -17,3 +17,28 @@ def solution(tickets):
     answer.sort()
     
     return answer[0]
+
+# --------
+from collections import defaultdict
+
+def solution(tickets):
+    # 딕셔너리 생성
+    airports = defaultdict(list)
+    for s, e in tickets:
+        airports[s].append(e)
+        
+    # 딕셔너리 정렬 - 오름차순
+    for key in airports.keys():
+        airports[key].sort()
+        
+    def dfs(airport):
+        # 도착지가 존재하는 경우 
+        while airports[airport]:
+            dfs(airports[airport].pop(0))
+        # 도착지가 존재하지 않는 경우 - 마지막에 도착
+        if not airports[airport]:
+            answer.append(airport)
+        
+    answer = []
+    dfs("ICN")
+    return answer[::-1]
