@@ -45,3 +45,43 @@ result = 0
 
 backTracking(0)
 print(result)
+
+
+# ---------------------------------------------
+import sys
+input = sys.stdin.readline
+
+def check_broke(eggs):
+    cnt = 0
+    for egg in eggs:
+        if egg[0] <= 0:
+            cnt += 1
+
+    return cnt
+
+
+def back_tracking(start):
+    global result
+    cnt = check_broke(eggs)
+    result = max(cnt, result)
+    if result == n or start == n:
+        return result
+
+    if eggs[start][0] <= 0:
+        back_tracking(start + 1)
+        return
+
+    for nxt_egg in range(n):
+        if start != nxt_egg and eggs[nxt_egg][0] > 0:
+            eggs[start][0] -= eggs[nxt_egg][1]
+            eggs[nxt_egg][0] -= eggs[start][1]
+            back_tracking(start + 1)
+            eggs[start][0] += eggs[nxt_egg][1]
+            eggs[nxt_egg][0] += eggs[start][1]
+
+
+n = int(input())
+eggs = [list(map(int, input().split())) for _ in range(n)] # [내구도, 무게]
+result = 0
+back_tracking(0)
+print(result)
