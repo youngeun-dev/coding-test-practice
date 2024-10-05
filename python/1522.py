@@ -15,3 +15,17 @@ for i in range(len(data)):
     cnt = min(cnt, temp.count('b'))
 
 print(cnt)
+
+
+# ------------
+import sys
+input = sys.stdin.readline
+
+words = list(input().rstrip())
+a_cnt = words.count('a')
+words += words[:a_cnt]
+result = 1e9
+for i in range(len(words) - a_cnt):
+    result = min(result, words[i:i+a_cnt].count('b'))
+
+print(result if result != 1e9 else 0)
